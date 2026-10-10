@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WISY — App Publishing Platform</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo"><div class="brand-mark">W</div><b>WISY</b></div>
+    <div class="auth-tabs">
+      <button id="loginTab" class="auth-tab active" type="button">Login</button>
+      <button id="signupTab" class="auth-tab" type="button">Create New ID</button>
+    </div>
+    <form id="authForm">
+      <label id="nameWrap" class="auth-field hidden-field">Full name
+        <input id="authName" placeholder="Your name" autocomplete="name">
+      </label>
+      <label>Username
+        <input id="authUsername" required placeholder="Choose a username" autocomplete="username">
+      </label>
+      <label>Email
+        <input id="authEmail" type="email" required placeholder="you@example.com" autocomplete="email">
+      </label>
+      <label>Password
+        <input id="authPassword" type="password" required minlength="4" placeholder="••••••••" autocomplete="current-password">
+      </label>
+      <label id="confirmWrap" class="auth-field hidden-field">Confirm password
+        <input id="authConfirm" type="password" placeholder="••••••••" autocomplete="new-password">
+      </label>
+      <button class="btn primary auth-submit" id="authSubmit" type="submit">Login to WISY</button>
+      <button id="loginForgotBtn" class="auth-forgot" type="button">Forgot password?</button>
+      <div id="authMsg" class="msg"></div>
+    </form>
+    <small class="demo-note">Demo accounts are saved only in this browser.</small>
+  </div>
+</div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">W</div><span>WISY</span></div>
+    <nav>
+      <a class="active" href="#home">⌂ <span>Home</span></a>
+      <a href="#discover">◈ <span>Discover</span></a>
+      <a href="#publish">＋ <span>Publish App</span></a>
+      <a href="#myapps">▣ <span>My Apps</span></a>
+      <a href="#analytics">◌ <span>Analytics</span></a>
+    </nav>
+    <div class="side-bottom">
+      <a href="#settings">⚙ <span>Settings</span></a>
+      <a href="#help">? <span>Help Center</span></a><a href="#" id="logoutBtn">↪ <span>Log out</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="mobile-brand">WISY</div>
+      <div class="search">⌕ <input id="search" placeholder="Search apps, developers..." /></div>
+      <button class="icon-btn" title="Notifications">♢</button>
+      <div class="avatar" id="avatar">T</div>
+    </header>
+
+    <section id="home" class="page">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">WISY APP STORE</div>
+          <h1>Discover apps.<br><em>Share your ideas.</em></h1>
+          <p>A clean home for developers to publish, manage and showcase their apps.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#publish">＋ Publish an app</a>
+            <a class="btn ghost" href="#discover">Explore apps →</a>
+          </div>
+        </div>
+        <div class="hero-orb"><span>W</span><small>BUILD • PUBLISH • GROW</small></div>
+      </div>
+
+      <div class="section-head"><h2>Featured apps</h2><a href="#discover">View all →</a></div>
+      <div id="featured" class="cards"></div>
+
+      <div class="section-head"><h2>Browse categories</h2></div>
+      <div class="categories">
+        <button>🎮 Games <span>124</span></button>
+        <button>🧰 Tools <span>86</span></button>
+        <button>🎨 Design <span>48</span></button>
+        <button>📚 Education <span>72</span></button>
+        <button>💼 Business <span>39</span></button>
+      </div>
+    </section>
+
+    <section id="discover" class="page hidden">
+      <div class="section-title"><div><div class="eyebrow">EXPLORE</div><h1>Discover apps</h1></div></div>
+      <div class="filter-row">
+        <button class="filter active" data-cat="All">All</button>
+        <button class="filter" data-cat="Games">Games</button><button class="filter" data-cat="Tools">Tools</button>
+        <button class="filter" data-cat="Design">Design</button><button class="filter" data-cat="Education">Education</button><button class="filter" data-cat="HACK">HACK</button>
+      </div>
+      <div id="discoverGrid" class="cards"></div>
+    </section>
+
+    <section id="publish" class="page hidden">
+      <div class="section-title"><div><div class="eyebrow">DEVELOPER STUDIO</div><h1>Publish a new app</h1><p>Give your app a home on WISY.</p></div></div>
+      <form id="publishForm" class="publish-card">
+        <input type="hidden" id="uploadedHtmlName" value="">
+        <div class="upload-box"><div class="upload-icon">↑</div><strong>App icon</strong><span>PNG/JPG • 512×512 recommended</span><input type="file" accept="image/*"></div>
+        <div class="form-grid">
+          <label>App name<input id="appName" required placeholder="e.g. Nova Player"></label>
+          <label>Developer<input id="developer" required placeholder="Your studio name"></label>
+          <label>Category<select id="category"><option>Games</option><option>Tools</option><option>Design</option><option>Education</option><option>Business</option><option>HACK</option></select></label>
+          <label>Version<input id="version" value="1.0.0"></label>
+          <label class="full">Short description<textarea id="description" required placeholder="Tell people what your app does..."></textarea></label>
+          <label class="full">App download / website URL<input id="url" type="url" placeholder="https://example.com"></label>
+        </div>
+
+        <button class="btn primary publish-main-btn" type="submit">＋ PUBLISH</button>
+        <div id="publishMsg" class="msg publish-main-msg"></div>
+
+        <div class="publisher-tools">
+          <div class="tool-head">
+            <div>
+              <div class="eyebrow">PHONE TOOLS</div>
+              <h2>Convert & prepare</h2>
+              <p>Use your phone to turn HTML code/files into a local preview URL or prepare an APK project.</p>
+            </div>
+          </div>
+
+          <div class="direct-html-card">
+          <div class="tool-icon">📄</div>
+          <h3>Direct HTML Upload</h3>
+          <p>Upload an HTML file and open it directly in your browser. No download button is provided.</p>
+          <input id="directHtmlFile" type="file" accept=".html,.htm,text/html">
+          <button class="btn primary" type="button" id="openDirectHtmlBtn" disabled>Open HTML →</button>
+          <div id="directHtmlMsg" class="msg"></div>
+          <small class="tool-note">The file is opened in this browser session only.</small>
+        </div>
+
+        <div class="tool-grid two-tools">
+            <div class="tool-card">
+              <div class="tool-icon">🔗</div>
+              <h3>HTML file → URL</h3>
+              <p>Upload an HTML file from your phone or PC and open it as a temporary browser URL.</p>
+              <input id="htmlUrlFile" type="file" accept=".html,.htm,text/html">
+              <div class="tool-actions">
+                <button class="btn primary" type="button" id="makeHtmlUrlBtn">Create URL</button>
+                <button class="btn ghost" type="button" id="copyHtmlUrlBtn" disabled>Copy URL</button>
+              </div>
+              <input id="htmlUrlOutput" class="tool-output" readonly placeholder="Generated URL appears here">
+              <small class="tool-note">This is a temporary local browser URL, not public hosting.</small>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-icon">📱</div>
+              <h3>HTML file → APK</h3>
+              <p>Upload your HTML file, prepare an Android WebView starter project, or publish the HTML app to WISY.</p>
+              <input id="apkHtmlFile" type="file" accept=".html,.htm,text/html">
+              <input id="apkAppName" placeholder="App name (e.g. My WISY App)">
+              <div class="tool-actions">
+                <button class="btn primary" type="button" id="makeApkProjectBtn">Prepare APK Project</button>
+                <button class="btn ghost" type="button" id="publishHtmlFileBtn">Publish HTML App</button>
+              </div>
+              <div id="apkMsg" class="msg"></div>
+              <small class="tool-note">The browser prepares the Android project ZIP. A real signed APK must be built with Android Studio/Gradle.</small>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </section>
+
+    <section id="myapps" class="page hidden">
+      <div class="section-title"><div><div class="eyebrow">YOUR STUDIO</div><h1>My Apps</h1></div><a class="btn primary" href="#publish">＋ New app</a></div>
+      <div id="myAppsGrid" class="cards"></div>
+    </section>
+
+    <section id="analytics" class="page hidden">
+      <div class="section-title"><div><div class="eyebrow">INSIGHTS</div><h1>Analytics</h1></div></div>
+      <div class="stats"><div><small>Total downloads</small><b>12,842</b><span>↑ 18.4%</span></div><div><small>App views</small><b>48,291</b><span>↑ 12.1%</span></div><div><small>Published apps</small><b>08</b><span>↑ 2 this month</span></div></div>
+      <div class="chart"><div class="chart-head"><b>Downloads</b><span>Last 7 days</span></div><div class="bars"><i style="height:34%"></i><i style="height:52%"></i><i style="height:42%"></i><i style="height:70%"></i><i style="height:58%"></i><i style="height:84%"></i><i style="height:96%"></i></div></div>
+    </section>
+
+    <section id="settings" class="page hidden">
+      <div class="section-title"><div><div class="eyebrow">ACCOUNT</div><h1>My Profile</h1><p>Edit your photo, display name and bio.</p></div></div>
+      <form id="profileEditForm" class="publish-card">
+        <label class="auth-field">Profile photo
+          <input id="profilePhotoInput" type="file" accept="image/*">
+        </label>
+        <label class="auth-field">Display name
+          <input id="profileDisplayName" placeholder="Your name">
+        </label>
+        <label class="auth-field">Bio
+          <textarea id="profileBio" maxlength="160" placeholder="Write something about yourself..."></textarea>
+        </label>
+        <button class="btn primary" type="submit">Save profile</button>
+        <button id="clearPhotoBtn" class="btn ghost" type="button">Remove photo</button>
+        <div id="profileEditMsg" class="msg"></div>
+      </form>
+    </section>
+
+    <section id="help" class="page hidden">
+      <div class="section-title"><div><div class="eyebrow">SUPPORT</div><h1>Help Center</h1><p>Quick help for the WISY demo.</p></div></div>
+      <div class="cards">
+        <article class="card"><h3>Publish an app</h3><p>Open Publish App, fill in the details and submit the form. Your demo app is stored in this browser session.</p></article>
+        <article class="card"><h3>Login & New ID</h3><p>Create a demo ID with a username, email and password, then use the same details to log in later on this browser.</p></article>
+        <article class="card"><h3>Profile</h3><p>Click your avatar in the top bar to view your WISY ID and account details.</p></article>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+
+<div id="forgotModal" class="modal hidden">
+  <div class="modal-box">
+    <button id="closeForgot" class="modal-close" type="button">×</button>
+    <div class="eyebrow">ACCOUNT RECOVERY</div>
+    <h2>Forgot password</h2>
+    <p class="modal-text">Enter your WISY username and email. In this demo, a verification code is generated locally. A real email requires a backend/email service.</p>
+
+    <div id="forgotStep1">
+      <label class="auth-field">Username
+        <input id="forgotUsername" placeholder="Your username">
+      </label>
+      <label class="auth-field">Email
+        <input id="forgotEmail" type="email" placeholder="you@example.com">
+      </label>
+      <button id="sendVerifyBtn" class="btn primary" type="button">Send verification code</button>
+    </div>
+
+    <div id="forgotStep2" class="hidden-field">
+      <label class="auth-field">Verification code
+        <input id="verifyCode" inputmode="numeric" maxlength="6" placeholder="6-digit code">
+      </label>
+      <label class="auth-field">New password
+        <input id="forgotNewPassword" type="password" minlength="4" placeholder="New password">
+      </label>
+      <button id="resetPasswordBtn" class="btn primary" type="button">Verify & reset password</button>
+    </div>
+
+    <div id="forgotMsg" class="msg"></div>
+  </div>
+</div>
+
+<div id="profileModal" class="modal hidden">
+  <div class="modal-box profile-modal-box">
+    <button id="closeProfile" class="modal-close" type="button">×</button>
+    <div class="profile-avatar-large" id="profileAvatarLarge">T</div>
+    <div class="eyebrow">WISY PROFILE</div>
+    <h2 id="profileTitle">Profile</h2>
+    <p id="profileBioText" class="modal-text">No bio added yet.</p>
+    <div class="profile-row"><span>Username</span><b id="profileUsername">—</b></div>
+    <div class="profile-row"><span>Email</span><b id="profileEmail">—</b></div>
+    <div class="profile-row"><span>WISY ID</span><b id="profileId">—</b></div>
+    <button id="editMyProfileBtn" class="btn primary profile-edit-btn" type="button">Edit my profile</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
